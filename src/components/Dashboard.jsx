@@ -26,7 +26,7 @@ export default function Dashboard() {
   ])
 
   const [defaultAccount, setDefaultAccount] = useState(null)
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  
 
   useEffect(() => {
     const newDefaultAccount = accounts.find((account) => account.isDefault) || accounts[0]
@@ -54,17 +54,24 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen">
-      <main className="container py-2">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <main className="w-full">
         <h1 className="text-3xl font-bold text-[#5850EC] mb-6">Dashboard</h1>
-        <div className="grid gap-6">
-          {defaultAccount && <MonthlyBudget used={4775} total={7000} accountName={defaultAccount.name} />}
-          <div className="grid gap-6 md:grid-cols-2">
+
+        {/* Grid Container */}
+        <div className="grid gap-4">
+          {defaultAccount && (
+            <MonthlyBudget used={4775} total={7000} accountName={defaultAccount.name} />
+          )}
+
+          {/* Transactions & Expense Breakdown */}
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
             <TransactionList transactions={transactions} />
             <ExpenseBreakdown expenseData={expenseData} />
           </div>
-          
-          <div className="grid gap-6 md:grid-cols-3">
+
+          {/* Account Cards */}
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {accounts.map((account) => (
               <AccountCard
                 key={account.id}
@@ -79,7 +86,6 @@ export default function Dashboard() {
           </div>
         </div>
       </main>
-      
     </div>
   )
 }

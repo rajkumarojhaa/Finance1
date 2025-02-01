@@ -27,7 +27,7 @@ export function ExpenseBreakdown({ expenseData }) {
   </ResponsiveContainer>
 </div>
 
-        <div className="mt-4 flex items-center justify-center gap-4">
+        <div className="mt-4 flex items-center justify-center gap-2 md:gap-6 lg:gap-8">
           {expenseData.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
