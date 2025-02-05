@@ -54,7 +54,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-slate-50 dark:bg-gray-900">
       <main className="w-full">
         <h1 className="text-3xl font-bold text-[#5850EC] mb-6">Dashboard</h1>
 

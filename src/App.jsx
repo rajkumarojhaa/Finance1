@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import MainLayout from "./components/MainLayout";
 import Dashboard from "./components/Dashboard";
 import { Layout } from "@/components/Layout";
+import AccountDetails from '@/components/AccountDetails';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
-            {/* Add other pages here */}
+            <Route path="account/:title" element={<AccountDetails />} />
+            {/* Yha Sare page enter karna he */}
           </Route>
         </Routes>
     </Layout>
@@ -24,4 +26,3 @@ function App() {
 }
 
 export default App;
-// In this file, we have imported the ThemeProvider component and wrapped the entire application inside it. This will allow us to use the theme context in any component of the application.
