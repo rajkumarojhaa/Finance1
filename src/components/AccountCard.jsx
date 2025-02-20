@@ -15,11 +15,11 @@ export function AccountCard({ title, balance, type, isDefault, onToggleDefault }
   };
 
   return (
-    <Card onClick={handleClick} className="flex items-center justify-center h-32 cursor-pointer">
+    <Card  className="flex items-center justify-center h-32 cursor-pointer">
       {hasData ? (
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
+        <CardHeader onClick={handleClick}>
+          <div  className="flex items-center justify-between">
+            <div >
               <CardTitle className="text-sm font-medium">{title}</CardTitle>
               <div className="text-2xl font-bold">${balance.toFixed(2)}</div>
               <div className="text-xs text-muted-foreground">{type}</div>

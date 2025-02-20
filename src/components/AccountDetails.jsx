@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { subDays, subMonths, isAfter } from "date-fns";
+import FinanceTable from "./FinanceTable";
 
 const AccountDetails = () => {
   const { title } = useParams();
@@ -104,8 +105,9 @@ const AccountDetails = () => {
   };
 
   return (
-    <div className="  bg-slate-50 dark:bg-gray-900">
-      <header className="mb-1 flex  sm:text-left ">
+    <div className="bg-slate-50 dark:bg-gray-900">
+      {/* Header Section */}
+      <header className="mb-4 flex sm:text-left">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text">
             {accountData.name}
@@ -118,55 +120,54 @@ const AccountDetails = () => {
           </h1>
         </span>
       </header>
-      <div className="card bg-slate-50 dark:bg-gray-800 shadow-xl rounded-lg p-3 w-full">
-        <div className="card-header flex flex-col sm:flex-row justify-between items-center gap-2">
-          <h2 className="text-lg sm:text-xl font-semibold">
-            Transaction Overview
-          </h2>
-          <select
-            value={filter}
-            onChange={handleFilterChange}
-            className="border rounded p-2 text-gray-900 dark:white dark:bg-gray-100 text-sm sm:text-base w-full sm:w-auto"
-          >
-            <option value="all">All Time</option>
-            <option value="7days">Last 7 Days</option>
-            <option value="1month">Last Month</option>
-            <option value="3months">Last 3 Months</option>
-            <option value="6months">Last 6 Months</option>
-          </select>
+
+      {/* Two-Card Layout */}
+      <div className="grid grid-cols-1 gap-4">
+        {/* Transaction Overview Card */}
+        <div className="card bg-slate-50 dark:bg-gray-800 shadow-xl rounded-lg  w-full">
+          <div className="card-header flex flex-col sm:flex-row justify-between items-center gap-2">
+            <select
+              value={filter}
+              onChange={handleFilterChange}
+              className="border rounded p-2 text-gray-900 dark:white dark:bg-gray-100 text-sm sm:text-base w-full sm:w-auto"
+            >
+              <option value="all">All Time</option>
+              <option value="7days">Last 7 Days</option>
+              <option value="1month">Last Month</option>
+              <option value="3months">Last 3 Months</option>
+              <option value="6months">Last 6 Months</option>
+            </select>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-3 text-center sm:text-left text-wrap">
+            <p className="text-sm sm:text-base font-medium">
+              Total Income: <span className="text-green-500">${truncateValue(totalIncome)}</span>
+            </p>
+            <p className="text-sm sm:text-base font-medium">
+              Total Expenses: <span className="text-red-500">${truncateValue(totalExpenses)}</span>
+            </p>
+            <p className="text-sm sm:text-base font-medium">
+              Net Amount: <span className="text-blue-500" title={netAmount.toString()}>{truncateValue(netAmount)}</span>
+            </p>
+          </div>
+          <div className="sm:mt-6 mt-2 overflow-x-auto w-full">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="income" fill="#82ca9d" name="Income" />
+                <Bar dataKey="expense" fill="#ff4d4d" name="Expense" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
-        <div className=" mt-4 grid grid-cols-3 gap-3 text-center sm:text-left text-wrap">
-          <p className="text-sm sm:text-base font-medium">
-            Total Income:{" "}
-            <span className="text-green-500">
-              ${truncateValue(totalIncome)}
-            </span>
-          </p>
-          <p className="text-sm sm:text-base font-medium">
-            Total Expenses:{" "}
-            <span className="text-red-500">
-              ${truncateValue(totalExpenses)}
-            </span>
-          </p>
-          <p className="text-sm sm:text-base font-medium">
-            Net Amount:{" "}
-            <span className="text-blue-500" title={netAmount.toString()}>
-              {truncateValue(netAmount)}
-            </span>
-          </p>
-        </div>
-        <div className="sm:mt-6 mt-2 overflow-x-auto w-full">
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="income" fill="#82ca9d" name="Income" />
-              <Bar dataKey="expense" fill="#ff4d4d" name="Expense" />
-            </BarChart>
-          </ResponsiveContainer>
+
+        {/* Finance Table Card */}
+        <div className="card ">
+          <h2 className="text-lg sm:text-xl font-semibold mb-3">Transaction Details</h2>
+          <FinanceTable />
         </div>
       </div>
     </div>
