@@ -124,45 +124,50 @@ const AccountDetails = () => {
       {/* Two-Card Layout */}
       <div className="grid grid-cols-1 gap-4">
         {/* Transaction Overview Card */}
-        <div className="card bg-slate-50 dark:bg-gray-800 shadow-xl rounded-lg  w-full">
-          <div className="card-header flex flex-col sm:flex-row justify-between items-center gap-2">
-            <select
-              value={filter}
-              onChange={handleFilterChange}
-              className="border rounded p-2 text-gray-900 dark:white dark:bg-gray-100 text-sm sm:text-base w-full sm:w-auto"
-            >
-              <option value="all">All Time</option>
-              <option value="7days">Last 7 Days</option>
-              <option value="1month">Last Month</option>
-              <option value="3months">Last 3 Months</option>
-              <option value="6months">Last 6 Months</option>
-            </select>
-          </div>
-          <div className="mt-4 grid grid-cols-3 gap-3 text-center sm:text-left text-wrap">
-            <p className="text-sm sm:text-base font-medium">
-              Total Income: <span className="text-green-500">${truncateValue(totalIncome)}</span>
-            </p>
-            <p className="text-sm sm:text-base font-medium">
-              Total Expenses: <span className="text-red-500">${truncateValue(totalExpenses)}</span>
-            </p>
-            <p className="text-sm sm:text-base font-medium">
-              Net Amount: <span className="text-blue-500" title={netAmount.toString()}>{truncateValue(netAmount)}</span>
-            </p>
-          </div>
-          <div className="sm:mt-6 mt-2 overflow-x-auto w-full">
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={data}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="income" fill="#82ca9d" name="Income" />
-                <Bar dataKey="expense" fill="#ff4d4d" name="Expense" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+        <div className="card bg-slate-50 dark:bg-gray-800 shadow-xl rounded-lg w-full">
+  <div className="card-header flex flex-col sm:flex-row justify-between items-center gap-2">
+    <select
+      value={filter}
+      onChange={handleFilterChange}
+      className="border rounded p-2 text-gray-900 dark:text-white dark:bg-gray-100 text-sm sm:text-base w-full sm:w-auto"
+    >
+      <option value="all">All Time</option>
+      <option value="7days">Last 7 Days</option>
+      <option value="1month">Last Month</option>
+      <option value="3months">Last 3 Months</option>
+      <option value="6months">Last 6 Months</option>
+    </select>
+  </div>
+  <div className="mt-4 grid grid-cols-3 gap-3 text-center sm:text-left text-wrap">
+    <p className="text-sm sm:text-base font-medium">
+      Total Income: <span className="text-green-500">${truncateValue(totalIncome)}</span>
+    </p>
+    <p className="text-sm sm:text-base font-medium">
+      Total Expenses: <span className="text-red-500">${truncateValue(totalExpenses)}</span>
+    </p>
+    <p className="text-sm sm:text-base font-medium">
+      Net Amount: <span className="text-blue-500" title={netAmount.toString()}>{truncateValue(netAmount)}</span>
+    </p>
+  </div>
+  
+  {/* Scrollable Container */}
+  <div className="sm:mt-6 mt-2 overflow-x-auto w-full">
+    <div className="w-[600px] sm:w-full"> {/* Ensures scrolling on small screens */}
+      <ResponsiveContainer width="100%" height={320}>
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="income" fill="#82ca9d" name="Income" />
+          <Bar dataKey="expense" fill="#ff4d4d" name="Expense" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </div>
+</div>
+
 
         {/* Finance Table Card */}
         <div className="card ">

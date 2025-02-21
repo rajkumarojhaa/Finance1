@@ -36,7 +36,9 @@ export function MonthlyBudget({ used, total, accountName }) {
       <CardContent>
         <div className="relative w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
           <div
-            className="absolute top-0 left-0 h-full bg-blue-600 dark:bg-blue-500 transition-all duration-300"
+            className={`absolute top-0 left-0 h-full transition-all duration-300 ${
+              percentage > 80 ? "bg-red-600 dark:bg-red-500" : "bg-blue-600 dark:bg-blue-500"
+            }`}
             style={{ width: `${percentage}%` }}
           />
         </div>

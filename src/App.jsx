@@ -6,6 +6,7 @@ import MainLayout from "./components/MainLayout";
 import Dashboard from "./components/Dashboard";
 import { Layout } from "@/components/Layout";
 import AccountDetails from '@/components/AccountDetails';
+import AddTransaction from "./components/AddTransaction";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="account/:title" element={<AccountDetails />} />
+            <Route path="add-transaction" element={<AddTransaction />} />
             {/* Yha Sare page enter karna he */}
           </Route>
         </Routes>
